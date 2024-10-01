@@ -25,16 +25,29 @@ public class HelloController {
     @GetMapping("hello-string")
     @ResponseBody //ResponseBody : http에서 header, body 중 body부분에 데이터를 직접 넣겠다는 의미
     public String helloString(@RequestParam("name") String name){
-        return "hello " + name; //"hello Spring"
+
+        return "hello " + name; //"hello Spring" 문자를 요구
     }
 
     @GetMapping("hello-api")
     @ResponseBody
-    public HelloController
+    public Hello helloApi(@RequestParam("name") String name){
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello;
+    }
 
-    static class Hello {
-        private String 
+    static class Hello{
+        private String name;
 
+        public String getName() {
+            return name;
+        }
 
+        public void setName(String name) {
+            this.name = name;
+        }
+        // getter, setter를 쓰는 이유 : name이 private으로 되어 있어 쉽게 꺼낼 수 없으므로
+        // getter, setter를 통해 데이터를 넣고 뺄 수 있음
     }
 }
